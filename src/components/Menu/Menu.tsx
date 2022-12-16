@@ -3,6 +3,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import AllBooks from '../AllBooks/AllBooks';
 
 
 interface TabPanelProps {
@@ -56,7 +57,7 @@ export default function Menu() {
             </Tabs>
           </Box>
           <TabPanel value={value} index={0}>
-            All Books
+            <AllBooks/>
           </TabPanel>
           <TabPanel value={value} index={1}>
             News
