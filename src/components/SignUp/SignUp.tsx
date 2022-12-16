@@ -4,6 +4,8 @@ import TextField from '@mui/material/TextField';
 import { FormControl, IconButton, Input, InputAdornment, InputLabel, Typography } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Container } from "@mui/system";
+import background from './../../images/background.png'
+
 
 export default function SignUp(){
     
@@ -15,14 +17,30 @@ export default function SignUp(){
     event.preventDefault();
     };
 
+    const styles = {
+        container: {
+            backgroundImage: `url(${background})`,
+            backgroundSize: '25rem',
+            backgroundPosition: 'left bottom',
+            backgroundRepeat : 'no-repeat'
+        },
+        text:{
+            background: "-webkit-linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent"
+        }
+    }
+
     return(
         <>
-        <Container sx={{display: 'flex', justifyContent: 'center', gap:'1.5rem', alignItems: 'center', height: '45rem'}}>
+        <Container style={styles.container} sx={{display: 'flex', justifyContent: 'center', gap:'1.5rem', alignItems: 'center', height: '45rem'}}>
         <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap:'1.5rem', alignItems: 'center',}}>
             <Typography
-                variant="h4" 
+                sx={{fontWeight: 'bold'}}
+                style={styles.text}
+                variant="h5" 
                 component="h2">
-              Sign Up
+              Sign Up to BookShelf
             </Typography>
             <TextField
                 sx={{ m: 1, width: '35ch' }}
