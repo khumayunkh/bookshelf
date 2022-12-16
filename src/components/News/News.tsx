@@ -1,15 +1,14 @@
 import React from "react";
 import {books} from './../array'
-import style from './allbooks.module.css'
+import style from './news.module.css'
 import { Button } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { NavLink } from "react-router-dom";
 
-export default function AllBooks(){
+export default function News(){
     return(
         <>
         <div className={style.container}>
-            {books.map((item, index)=>
+            {books.map((item, index)=>item.status == '1'?
               <div className={style.book}>
                 {item.cover}
                 <div className={style.title}>
@@ -17,26 +16,14 @@ export default function AllBooks(){
                     <h3>{item.title}, {item.published}</h3>
                     <h4>By {item.author}</h4>
                   </div>
-                  <div className={style.btn}>
-                    {item.status == '1'? 
+                  <div className={style.btn}> 
                     <Button variant="contained" color="secondary">
                         Status: New
-                    </Button>:<></>
-                    }
-                    {item.status == '2'? 
-                    <Button variant="contained" color="success">
-                        Status: Reading
-                    </Button>:<></>
-                    }
-                    {item.status == '3'? 
-                    <Button variant="contained">
-                        Status: Finished
-                    </Button>:<></>
-                    }
+                    </Button>
                     <DeleteIcon/>
                   </div>
                 </div>
-              </div>
+              </div>:<></>
             )}
           </div>
         </>
