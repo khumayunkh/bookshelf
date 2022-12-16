@@ -4,6 +4,8 @@ import style from './allbooks.module.css'
 import { Button } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { NavLink } from "react-router-dom";
+import Reading from "../Reading/Reading";
+import Finished from "../Finished/Finished";
 
 export default function AllBooks(){
     return(
@@ -25,12 +27,12 @@ export default function AllBooks(){
                     }
                     {item.status == '2'? 
                     <Button variant="contained" color="success">
-                        Status: Reading
+                        <Reading/>
                     </Button>:<></>
                     }
                     {item.status == '3'? 
                     <Button variant="contained">
-                        Status: Finished
+                        <Finished/>
                     </Button>:<></>
                     }
                     <DeleteIcon/>
