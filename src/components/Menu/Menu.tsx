@@ -48,8 +48,8 @@ export default function Menu() {
   return (
         <Box sx={{ width: '100%', display: 'flex', flexDirection:'column', margin: '2%'}}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider'}}>
-            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-              <Tab  label="All Books" {...a11yProps(0)} />
+            <Tabs value={value} onChange={handleChange} textColor="secondary" indicatorColor="secondary">
+              <Tab label="All Books" {...a11yProps(0)} />
               <Tab label="News" {...a11yProps(1)} />
               <Tab label="Reading" {...a11yProps(2)} />
               <Tab label="Finished" {...a11yProps(3)} />

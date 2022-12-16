@@ -55,8 +55,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 function Header() {
   return (
     <div className="App">
-      <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <Box sx={{ flexGrow: 1}}>
+      <AppBar position="static" sx={{ flexGrow: 1, background: '#9c27b0' }}>
         <Toolbar>
           <IconButton
             size="large"
