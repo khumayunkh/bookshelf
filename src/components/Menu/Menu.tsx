@@ -5,6 +5,8 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import AllBooks from '../AllBooks/AllBooks';
 import News from '../News/News';
+import Reading from '../Reading/Reading';
+import Finished from '../Finished/Finished';
 
 
 interface TabPanelProps {
@@ -64,10 +66,10 @@ export default function Menu() {
             <News/>
           </TabPanel>
           <TabPanel value={value} index={2}>
-            Reading
+            <Reading/>
           </TabPanel>
           <TabPanel value={value} index={3}>
-            Finished
+            <Finished/>
           </TabPanel>
         </Box>
   );
