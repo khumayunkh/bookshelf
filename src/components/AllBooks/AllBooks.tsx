@@ -17,17 +17,17 @@ export default function AllBooks(){
                     <h4>By {item.author}</h4>
                   </div>
                   <div className={style.btn}>
-                    {item.status == '1'? 
+                    {item.status == 1 ? 
                     <Button variant="contained" color="secondary">
                         Status: New
                     </Button>:<></>
                     }
-                    {item.status == '2'? 
+                    {item.status == 2 ? 
                     <Button variant="contained" color="success">
                         Status: Reading
                     </Button>:<></>
                     }
-                    {item.status == '3'? 
+                    {item.status == 3 ? 
                     <Button variant="contained">
                         Status: Finished
                     </Button>:<></>

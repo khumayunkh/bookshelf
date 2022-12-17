@@ -8,7 +8,7 @@ export default function News(){
     return(
         <>
         <div className={style.container}>
-            {books.map((item, index)=>item.status == '1'?
+            {books.map((item, index)=>item.status == 1?
               <div className={style.book}>
                 {item.cover}
                 <div className={style.title}>

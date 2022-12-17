@@ -8,7 +8,7 @@ export default function Reading(){
     return(
         <>
         <div className={style.container}>
-            {books.map((item, index)=>item.status == '2'?
+            {books.map((item, index)=>item.status == 2?
               <div className={style.book}>
                 {item.cover}
                 <div className={style.title}>

@@ -8,7 +8,7 @@ export default function Finished(){
     return(
         <>
         <div className={style.container}>
-            {books.map((item, index)=>item.status == '3'?
+            {books.map((item, index)=>item.status == 3?
               <div className={style.book}>
                 {item.cover}
                 <div className={style.title}>
