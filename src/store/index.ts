@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import todoSlice from './todoSlice';
+import signUp from './SignUp';
 
 
 const store = configureStore({
   reducer: {
-    todos: todoSlice,
+    login: signUp,
   },
 });
 
