@@ -9,6 +9,8 @@ export const deleteABook = async(id: number)=>{
     return await client.delete(`/books/:${id}`)
 }
 
-export const EditABook = async(id: number)=>{
-    return await client.patch(`/books/:${id}`)
+export const EditABook = async(id: number, status : number)=>{
+    return await client.patch(`/books/:${id}`, {
+        status : status
+    })
 }
