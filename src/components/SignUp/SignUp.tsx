@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from "react";
+import React from "react";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Typography } from "@mui/material";
@@ -9,9 +9,11 @@ import { useAppDispatch } from "../../hook";
 import { signInThunk } from "../../store/SignUp";
 import { useForm } from "react-hook-form";
 import style from './signup.module.css'
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp(){
     const {register, handleSubmit} = useForm()
+    const navigate = useNavigate()
 
     const nameRegister = register("name")
     const emailRegister = register("email")
@@ -35,6 +37,7 @@ export default function SignUp(){
             key : data.key,
             secret: data.secret
         }))
+        navigate('/')
     }
 
     const styles = {

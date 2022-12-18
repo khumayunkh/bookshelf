@@ -11,6 +11,10 @@ export const register = async (name: string, email : string, key: string, secret
     })
 }
 
+export const logout = async () => {
+    localStorage.removeItem('key')
+    localStorage.removeItem('secret')
+}
 
 // export const getMe = async() => {
 //     return await client.get('/myself')

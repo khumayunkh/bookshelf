@@ -7,7 +7,11 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
-import AddIcon from '@mui/icons-material/Add';
+import style from './header.module.css'
+import { useAppDispatch, useAppSelector } from '../../hook';
+import { logout } from '../../api/SignUp';
+import { setIsAuthAction } from '../../store/SignUp';
+import { NavLink } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -53,20 +57,26 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 
 function Header() {
+  const {auth} = useAppSelector(state => state.login)
+  const {isAuth} = useAppSelector(state => state.login)
+  const dispatch = useAppDispatch()
+
+  const logOut = () => {
+    logout().then(()=>{
+        dispatch(setIsAuthAction(false))
+    })
+  }
+
   return (
     <div className="App">
       <Box sx={{ flexGrow: 1}}>
       <AppBar position="static" sx={{ flexGrow: 1, background: '#9c27b0' }}>
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <AddIcon/>
-          </IconButton>
+          {isAuth == true ? 
+          <button onClick={() => logOut()} className={style.btn}>LogOut</button>
+          :
+          <NavLink to='/signup' className={style.btn}>Sign Up</NavLink>
+          }
           <Typography
             variant="h6"
             noWrap

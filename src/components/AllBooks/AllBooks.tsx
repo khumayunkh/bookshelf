@@ -9,7 +9,7 @@ export default function AllBooks(){
         <>
         <div className={style.container}>
             {books.map((item, index)=>
-              <div className={style.book}>
+              <div key={index} className={style.book}>
                 {item.cover}
                 <div className={style.title}>
                   <div className={style.title_in}>
