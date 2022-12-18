@@ -1,5 +1,5 @@
 import axios, {AxiosInstance, AxiosRequestConfig} from "axios";
-const crypto = require('crypto')
+const crypto = require('create-hash')
 
 
 export const client = axios.create({
