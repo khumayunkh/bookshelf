@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AppDispatch, RootState } from '.';
 import { register } from '../api/SignUp';
 
 type Auth = {
@@ -17,29 +18,24 @@ const initialState: AuthState = {
   auth: [],
 }
 
-export type NewUser = {
-  name : string;
-  email : string;
-  key : string;
-  secret : string
-}
+// export const signInThunk = createAsyncThunk<void, { email: string, password: string }, {state: RootState, dispatch: AppDispatch}>(
+//   'signIn',
+//   async (data, {dispatch, getState}) => {
+//       dispatch(setIsLoadingAction(true))
+//       try {
+//           await register(data)
+//           dispatch(setLoginSuccessful(true))
+//       } catch (error) {
+//           if (axios.isAxiosError(error)){
+//               if(error.response) dispatch(setErrorMessageAction(error.response.data.detail))
+//               else dispatch(setErrorMessageAction(error.message))
+//           }
+//       } finally {
+//           dispatch(setIsLoadingAction(false))
+//       }
 
-
-const userData: NewUser = {
-  name : 'Humoyun',
-  email : 'khumayunkh',
-  key: 'qwerty',
-  secret : 'qwerty'
-}
-
-// export const authAsyncThunk = createAsyncThunk<
-//   NewUser>(
-//   "register/authAsyncThunk",
-//   async (userData) => {
-//     const res = await register<NewUser>({userData});
-//     return res.data;
 //   }
-// );
+// )
 
 
 const signUp = createSlice({

@@ -1,10 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import {books} from './../array'
 import style from './news.module.css'
 import { Button } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 
-export default function News(){
+export default function News(){ 
     return(
         <>
         <div className={style.container}>

@@ -1,16 +1,16 @@
-import {client} from './index'
+import axios from 'axios'
 
 
 export const getAllBooks = async()=>{
-    return await client.get('/books')
+    return await axios.get('/books')
 }
 
 export const deleteABook = async(id: number)=>{
-    return await client.delete(`/books/:${id}`)
+    return await axios.delete(`/books/:${id}`)
 }
 
 export const EditABook = async(id: number, status : number)=>{
-    return await client.patch(`/books/:${id}`, {
+    return await axios.patch(`/books/:${id}`, {
         status : status
     })
 }

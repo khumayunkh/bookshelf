@@ -1,22 +1,33 @@
-import axios from "axios";
+import axios, {AxiosInstance, AxiosRequestConfig} from "axios";
+const crypto = require('crypto')
 
 
 export const client = axios.create({
-    baseURL: 'http://localhost:3006/',
+    baseURL: 'https://no23.lavina.tech/',
     timeout: 10000,
     headers: {
-        'Key': `${localStorage.getItem('key')}`,
-        'Sign': `${localStorage.getItem('sign')}`
+        'Key': `${localStorage.getItem('key')}`
     }
 });
 
 
-const setConfiguration = (client: any) => {
+const setConfiguration = (client: AxiosInstance) => {
     client.interceptors.request.use(
-        (config : any) => {
-            config.headers && (config.headers['Key'] = `${localStorage.getItem('key')}`) && (config.headers['Sign'] = `${localStorage.getItem('sign')}`)
+        (config: AxiosRequestConfig) => {
+            if(config.headers){
+                debugger
+                let method : any = config.method
+                let url = config.url
+                let data = config.data
+                let secret = localStorage.getItem('secret')
+                const signStr = method + url + JSON.stringify(data) + secret
+                const md5 = crypto.createHash('md5')
+                const sign = md5.update(signStr).digest('hex')
+                config.headers['Sign'] = `${sign}`
+            }
             return config
-        }, 
+        },  
+        error => Promise.reject(error)
     )
 }
 
