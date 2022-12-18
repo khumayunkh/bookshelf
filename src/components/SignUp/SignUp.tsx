@@ -4,26 +4,21 @@ import TextField from '@mui/material/TextField';
 import { Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import background from './../../images/background.png'
+import Button from '@mui/material/Button';
 import { useAppDispatch } from "../../hook";
 import { signInThunk } from "../../store/SignUp";
-
+import { useForm } from "react-hook-form";
+import style from './signup.module.css'
 
 export default function SignUp(){
-    // const [name, setName] = useState<string>('humahq')
-    // const [email, setEmail] = useState<string>('humahq@gmail.com')
-    // const [key, setKey] = useState<string>('humahq')
-    // const [secret, setSecret] = useState<string>('humahq')
+    const {register, handleSubmit} = useForm()
 
-    // const dispatch = useAppDispatch()
+    const nameRegister = register("name")
+    const emailRegister = register("email")
+    const keyRegister = register("key")
+    const secretRegister = register("secret")
 
-    // useEffect(() => {
-    //     dispatch(signInThunk({
-    //         name: name,
-    //         email: email,
-    //         key : key,
-    //         secret : secret
-    //     }))
-    // },[])
+    const dispatch = useAppDispatch()
 
     const [showPassword, setShowPassword] = React.useState(false);
 
@@ -32,6 +27,15 @@ export default function SignUp(){
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     };
+
+    const onSubmit = async(data: any) => {
+        dispatch(signInThunk({
+            name : data.name,
+            email : data.email,
+            key : data.key,
+            secret: data.secret
+        }))
+    }
 
     const styles = {
         container: {
@@ -58,10 +62,12 @@ export default function SignUp(){
                 component="h2">
               Sign Up to BookShelf
             </Typography>
+            <form className={style.form} onSubmit={handleSubmit(onSubmit)}>
             <TextField
                 sx={{ m: 1, width: '35ch' }}
                 id="standard-multiline-flexible"
                 label="Name"
+                {...nameRegister}
                 multiline
                 maxRows={4}
                 variant="standard"
@@ -70,6 +76,7 @@ export default function SignUp(){
                 sx={{ m: 1, width: '35ch' }}
                 id="standard-multiline-flexible"
                 label="Email"
+                {...emailRegister}
                 multiline
                 maxRows={4}
                 variant="standard"
@@ -78,6 +85,7 @@ export default function SignUp(){
                 sx={{ m: 1, width: '35ch' }}
                 id="standard-multiline-flexible"
                 label="Key"
+                {...keyRegister}
                 multiline
                 maxRows={4}
                 variant="standard"
@@ -86,10 +94,13 @@ export default function SignUp(){
                 sx={{ m: 1, width: '35ch' }}
                 id="standard-multiline-flexible"
                 label="Secret"
+                {...secretRegister}
                 multiline
                 maxRows={4}
                 variant="standard"
             />
+             <button className={style.btn}>Sign Up</button>
+             </form>
         </Box>
         </Container>
         </>

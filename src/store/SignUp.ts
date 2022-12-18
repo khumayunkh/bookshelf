@@ -15,7 +15,6 @@ type AuthState = {
   auth: Auth[];
   loading: boolean;
   error: string
-
 }
 
 const initialState: AuthState = {
