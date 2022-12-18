@@ -5,7 +5,7 @@ import { Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import background from './../../images/background.png'
 import Button from '@mui/material/Button';
-import { useAppDispatch } from "../../hook";
+import { useAppDispatch, useAppSelector } from "../../hook";
 import { signInThunk } from "../../store/SignUp";
 import { useForm } from "react-hook-form";
 import style from './signup.module.css'
@@ -14,6 +14,8 @@ import { useNavigate } from "react-router-dom";
 export default function SignUp(){
     const {register, handleSubmit} = useForm()
     const navigate = useNavigate()
+    const {isAuth} = useAppSelector(state => state.login)
+    const {error} = useAppSelector(state => state.login)
 
     const nameRegister = register("name")
     const emailRegister = register("email")
@@ -37,6 +39,9 @@ export default function SignUp(){
             key : data.key,
             secret: data.secret
         }))
+    }
+
+    if(isAuth == true){
         navigate('/')
     }
 

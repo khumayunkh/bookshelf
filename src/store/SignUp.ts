@@ -24,7 +24,7 @@ const initialState: AuthState = {
   auth: {},
   loading : false,
   error: '',
-  isAuth : true
+  isAuth : false
 }
 
 export const signInThunk = createAsyncThunk<void, { name: string, email: string, key: string, secret: string }, {state: RootState, dispatch: AppDispatch}>(
@@ -33,8 +33,8 @@ export const signInThunk = createAsyncThunk<void, { name: string, email: string,
       dispatch(setIsLoadingAction(true))
       try {
           const res = await register(name,email,key,secret)
-          dispatch(setIsAuthAction(true))
           const data = res.data.data
+          dispatch(setIsAuthAction(true))
           localStorage.setItem('key', res.data.data.key)
           localStorage.setItem('secret', res.data.data.secret)
           console.log(data)
