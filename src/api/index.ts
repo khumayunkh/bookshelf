@@ -1,5 +1,5 @@
 import axios, {AxiosInstance, AxiosRequestConfig} from "axios";
-const crypto = require('create-hash')
+// const crypto = require('create-hash')
 
 
 export const client = axios.create({
@@ -21,9 +21,9 @@ const setConfiguration = (client: AxiosInstance) => {
                 let data = config.data
                 let secret = localStorage.getItem('secret')
                 const signStr = method + url + JSON.stringify(data) + secret
-                const md5 = crypto.createHash('md5')
-                const sign = md5.update(signStr).digest('hex')
-                config.headers['Sign'] = `${sign}`
+                // const md5 = crypto.createHash('md5')
+                // const sign = md5.update(signStr).digest('hex')
+                config.headers['Sign'] = `${signStr}`
             }
             return config
         },  

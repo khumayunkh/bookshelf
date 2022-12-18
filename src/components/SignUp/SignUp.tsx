@@ -1,14 +1,30 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { FormControl, IconButton, Input, InputAdornment, InputLabel, Typography } from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import background from './../../images/background.png'
+import { useAppDispatch } from "../../hook";
+import { signInThunk } from "../../store/SignUp";
 
 
 export default function SignUp(){
-    
+    // const [name, setName] = useState<string>('humahq')
+    // const [email, setEmail] = useState<string>('humahq@gmail.com')
+    // const [key, setKey] = useState<string>('humahq')
+    // const [secret, setSecret] = useState<string>('humahq')
+
+    // const dispatch = useAppDispatch()
+
+    // useEffect(() => {
+    //     dispatch(signInThunk({
+    //         name: name,
+    //         email: email,
+    //         key : key,
+    //         secret : secret
+    //     }))
+    // },[])
+
     const [showPassword, setShowPassword] = React.useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -66,24 +82,14 @@ export default function SignUp(){
                 maxRows={4}
                 variant="standard"
             />
-            <FormControl sx={{ m: 1, width: '35ch' }} variant="standard">
-                <InputLabel htmlFor="standard-adornment-password">Secret</InputLabel>
-                <Input
-                  id="standard-adornment-password"
-                  type={showPassword ? 'text' : 'password'}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />
-            </FormControl>
+            <TextField
+                sx={{ m: 1, width: '35ch' }}
+                id="standard-multiline-flexible"
+                label="Secret"
+                multiline
+                maxRows={4}
+                variant="standard"
+            />
         </Box>
         </Container>
         </>

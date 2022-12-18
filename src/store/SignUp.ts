@@ -29,7 +29,7 @@ export const signInThunk = createAsyncThunk<void, { name: string, email: string,
   async ({name, email, key, secret}, {dispatch, getState}) => {
       dispatch(setIsLoadingAction(true))
       try {
-          const res: any = await register(name,email,key,secret)
+          const res = await register(name,email,key,secret)
           const data = res.data
           localStorage.setItem('key', res.data.data.key)
           localStorage.setItem('secret', res.data.data.secret)

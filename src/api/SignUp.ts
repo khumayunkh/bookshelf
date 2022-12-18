@@ -3,7 +3,7 @@ import { client } from './index'
 
 
 export const register = async (name: string, email : string, key: string, secret: string) => {
-    return await client.post('signup/', {
+    return await axios.post('https://no23.lavina.tech/signup', {
         name : name,
         email : email,
         key : key,
@@ -12,6 +12,6 @@ export const register = async (name: string, email : string, key: string, secret
 }
 
 
-export const getMe = async()=>{
-    return await client.get('/myself')
-}
+// export const getMe = async() => {
+//     return await client.get('/myself')
+// }
