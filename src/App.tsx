@@ -6,6 +6,7 @@ import Menu from './components/Menu/Menu';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import SignUp from './components/SignUp/SignUp';
 import { useAppSelector } from './hook';
+import {AddBook} from './components/AddBook/AddBook';
 
 function App() {
 
@@ -17,6 +18,13 @@ function App() {
           element={<>
             <Header/>
             <Menu/>
+          </>}
+        />
+        <Route
+          path='/addbook'
+          element={<>
+            <Header/>
+            <AddBook/>
           </>}
         />
         <Route

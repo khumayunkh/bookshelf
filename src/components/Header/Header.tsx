@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from '../../hook';
 import { logout } from '../../api/SignUp';
 import { setIsAuthAction } from '../../store/SignUp';
 import { NavLink } from 'react-router-dom';
+import { Add } from '@mui/icons-material';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -83,8 +84,17 @@ function Header() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            Bookshelf
+            <NavLink className={style.nav} to='/'>Bookshelf</NavLink>
           </Typography>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            sx={{ mr: 2 }}
+          >
+            <NavLink className={style.nav} to='/addbook'><Add/></NavLink>
+          </IconButton>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />

@@ -1,0 +1,16 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn{
+    border: none;
+    width: 18rem;
+    height: 2rem;
+    background-color: rgb(68, 68, 197);
+    color: white;
+    font-size: 14px;
+    border-radius: 5px;
+}

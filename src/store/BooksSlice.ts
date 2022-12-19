@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk, AnyAction } from '@reduxjs/toolkit';
-import { getAllBooks } from '../api/Books';
+import { AddBooks, getAllBooks } from '../api/Books';
 
 type Book = {
   id: string;
@@ -7,7 +7,7 @@ type Book = {
   isbn: string;
   author: string;
   publishd: string;
-  cover : string
+  cover : string;
 }
 
 type BooksState = {
@@ -25,10 +25,29 @@ export const fetchBooks = createAsyncThunk<Book[], undefined, {rejectValue: stri
       }
 
       const data = await response.data;
+      console.log(response.data)
 
       return data;
     }
 );
+
+
+
+
+
+export const addNewBooks = createAsyncThunk<Book, {author:string, isbn:string}, { rejectValue: string }>(
+    'books/addNewBooks',
+    async function ({author,isbn}, { rejectWithValue }) {
+  
+        const response = await AddBooks(author,isbn)
+  
+        if (!response) {
+          return rejectWithValue('Can\'t add task. Server error.');
+        }
+        const data = response.data
+        return data
+    }
+  );
 
 
 // export const toggleStatus = createAsyncThunk<Todo, string, { rejectValue: string, state: { todos: TodosState} }>(

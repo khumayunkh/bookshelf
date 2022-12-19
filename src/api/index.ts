@@ -20,14 +20,18 @@ const setConfiguration = (client: AxiosInstance) => {
     client.interceptors.request.use(
         (config: AxiosRequestConfig) => {
             if(config.headers){
-                let method : any = config.method?.toUpperCase()
+                debugger
+                let method = config.method?.toUpperCase()
                 let url = 'https://no23.lavina.tech/' + config.url
-                let data = config.data
+                let data = config.data 
+                let signStr
                 let secret = localStorage.getItem('secret')
-                let signStr = method + url + JSON.stringify(data) + secret
+                {data === undefined ?
+                signStr = method + url + secret : signStr = method + url+ JSON.stringify(data) + secret}
                 // signStr = signStr.replaceAll(/\\/, '')
                 const hash = CryptoJS.MD5(signStr).toString();
                 config.headers['Sign'] = `${hash}`
+                config.headers['Key'] = `${localStorage.getItem('key')}`
             }
             return config
         },  

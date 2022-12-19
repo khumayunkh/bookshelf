@@ -3,14 +3,18 @@ import {books} from './../array'
 import style from './allbooks.module.css'
 import { Button } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useAppDispatch } from "../../hook";
+import { useAppDispatch, useAppSelector } from "../../hook";
+import { fetchBooks } from "../../store/BooksSlice";
 
 export default function AllBooks(){
+  const {isAuth} = useAppSelector(state => state.login)
   const dispatch = useAppDispatch()
 
   useEffect(() =>{
-    
-  },[])
+    if(isAuth){
+      dispatch(fetchBooks())
+    }
+  },[dispatch])
   return(
       <>
       <div className={style.container}>
