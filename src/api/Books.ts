@@ -10,10 +10,13 @@ export const deleteABook = async(id: number)=>{
     return await client.delete(`/books/:${id}`)
 }
 
-export const AddBooks = async(author: string,isbn: string)=>{
+export const AddBooks = async(author: string,isbn: string, title:string, published: string, pages: string)=>{
     return await client.post('books',{
         author: author,
-        isbn : isbn
+        isbn : isbn,
+        title: title,
+        published: published,
+        pages: pages
     })
 }
 

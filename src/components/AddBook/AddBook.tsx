@@ -18,7 +18,10 @@ export const AddBook = () => {
     const onSubmit = async(data: any) => {
         dispatch(addNewBooks({
             author: data.author,
-            isbn: data.isbn
+            isbn: data.isbn,
+            title: data.title,
+            published : data.date,
+            pages: data.page
         }))
     }
     
