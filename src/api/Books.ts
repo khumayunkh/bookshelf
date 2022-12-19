@@ -6,7 +6,7 @@ export const getAllBooks = async()=>{
     return await client.get('books')
 }
 
-export const deleteABook = async(id: number)=>{
+export const deleteABook = async(id: string)=>{
     return await client.delete(`books/:${id}`)
 }
 
@@ -16,7 +16,7 @@ export const AddBooks = async(isbn: string)=>{
     })
 }
 
-export const EditABook = async(id: number, status : number)=>{
+export const EditABook = async(id: string, status : string)=>{
     return await client.patch(`books/:${id}`, {
         status : status
     })

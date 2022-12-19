@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from "react";
-import {books} from './../array'
+import React from "react";
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
 import style from './news.module.css'
-import { Button } from "@mui/material";
-import DeleteIcon from '@mui/icons-material/Delete';
-import { useAppSelector } from "../../hook";
+import { useAppDispatch, useAppSelector } from "../../hook";
 import bookImg from './../../images/book.jpg'
+import { deleteBook } from "../../store/BooksSlice";
 
 export default function News(){ 
   const bookList = useAppSelector(state => state.books.list)
+  const dispatch = useAppDispatch()
+
   return(
       <>
        <>
@@ -32,7 +32,7 @@ export default function News(){
                         <FormControlLabel value="Finished" control={<Radio />} label="Finished" />
                       </RadioGroup>
                     </FormControl>
-                  <DeleteIcon/>
+                   <button className={style.delete} onClick={() => dispatch(deleteBook(i.book.id))}>Delete</button>
                 </div>
               </div>
             </div>)}

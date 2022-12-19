@@ -1,14 +1,15 @@
 import React from "react";
 import {books} from './../array'
 import style from './finished.module.css'
-import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
-import DeleteIcon from '@mui/icons-material/Delete';
+import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
 import bookImg from './../../images/book.jpg'
-import { useAppSelector } from "../../hook";
+import { useAppDispatch, useAppSelector } from "../../hook";
+import { deleteBook } from "../../store/BooksSlice";
 
 export default function Finished(){
   const bookList = useAppSelector(state => state.books.list)
-  
+  const dispatch = useAppDispatch()
+
     return(
       <>
       <div className={style.container}>
@@ -31,7 +32,7 @@ export default function Finished(){
                         <FormControlLabel value="Finished" control={<Radio />} label="Finished" />
                       </RadioGroup>
                     </FormControl>
-                  <DeleteIcon/>
+                    <button className={style.delete} onClick={() => dispatch(deleteBook(i.book.id))}>Delete</button>
                 </div>
               </div>
             </div>)}

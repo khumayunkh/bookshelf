@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk, AnyAction } from '@reduxjs/toolkit';
-import { AddBooks, getAllBooks } from '../api/Books';
+import { AddBooks, deleteABook, getAllBooks } from '../api/Books';
 
 
 type BookData = {
@@ -53,6 +53,20 @@ export const addNewBooks = createAsyncThunk<Book, { isbn:string}, { rejectValue:
     }
 );
 
+export const deleteBooks = createAsyncThunk<Book, { id:string}, { rejectValue: string }>(
+  'books/deleteBooks',
+  async function ({id}, { rejectWithValue }) {
+
+    const response = await deleteABook(id)
+    
+    if (!response) {
+      return rejectWithValue('Can\'t add task. Server error.');
+    }
+
+    return response
+  }
+);
+
 export const deleteBook = createAsyncThunk<string, string, { rejectValue: string }>(
   'todos/deleteTodo',
   async function (id, { rejectWithValue }) {
@@ -87,25 +101,11 @@ const BookSlice = createSlice({
         state.list = action.payload;
         state.loading = false;
       })
-    //   .addCase(addNewTodo.pending, (state) => {
-    //     state.error = null;
-    //   })
-    //   .addCase(addNewTodo.fulfilled, (state, action) => {
-    //     state.list.push(action.payload);
-    //   })
-    //   .addCase(toggleStatus.fulfilled, (state, action) => {
-    //     const toggledTodo = state.list.find(todo => todo.id === action.payload.id);
-    //     if (toggledTodo) {
-    //       toggledTodo.completed = !toggledTodo.completed;
-    //     }
-    //   })
-    //   .addCase(deleteTodo.fulfilled, (state, action) => {
-    //     state.list = state.list.filter(todo => todo.id !== action.payload);
-    //   })
-    //   .addMatcher(isError, (state, action: PayloadAction<string>) => {
-    //     state.error = action.payload;
-    //     state.loading = false;
-    //   });
+      .addCase(deleteBook.fulfilled, (state, action) => {
+        if(state.list?.data){
+          state.list.data = state.list.data.filter(todo => todo.book.id !== action.payload)
+        }
+      })
   }
 });
 

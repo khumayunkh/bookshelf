@@ -1,13 +1,14 @@
 import React from "react";
-import {books} from './../array'
 import style from './reading.module.css'
-import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
-import DeleteIcon from '@mui/icons-material/Delete';
-import { useAppSelector } from "../../hook";
+import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
+import { useAppDispatch, useAppSelector } from "../../hook";
 import bookImg from './../../images/book.jpg'
+import { deleteBook } from "../../store/BooksSlice";
 
 export default function Reading(){
   const bookList = useAppSelector(state => state.books.list)
+  const dispatch = useAppDispatch()
+
     return(
       <>
       <div className={style.container}>
@@ -30,7 +31,7 @@ export default function Reading(){
                         <FormControlLabel value="Finished" control={<Radio />} label="Finished" />
                       </RadioGroup>
                     </FormControl>
-                  <DeleteIcon/>
+                    <button className={style.delete} onClick={() => dispatch(deleteBook(i.book.id))}>Delete</button>
                 </div>
               </div>
             </div>)}

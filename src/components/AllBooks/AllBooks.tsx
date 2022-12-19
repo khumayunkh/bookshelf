@@ -3,7 +3,7 @@ import style from './allbooks.module.css'
 import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useAppDispatch, useAppSelector } from "../../hook";
-import { fetchBooks } from "../../store/BooksSlice";
+import { deleteBook, fetchBooks } from "../../store/BooksSlice";
 import bookImg from './../../images/book.jpg'
 
 export const AllBooks = () => {
@@ -41,7 +41,7 @@ export const AllBooks = () => {
                         <FormControlLabel value="Finished" control={<Radio />} label="Finished" />
                       </RadioGroup>
                     </FormControl>
-                  <DeleteIcon/>
+                  <button className={style.delete} onClick={() => dispatch(deleteBook(i.book.id))}>Delete</button>
                 </div>
               </div>
             </div>)}

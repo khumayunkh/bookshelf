@@ -68,3 +68,13 @@ img{
     justify-content: space-between;
     align-items: center;
 }
+
+.delete{
+    border: none;
+    width: 5rem;
+    height: 1.8rem;
+    background-color: red;
+    color: white;
+    font-size: 14px;
+    border-radius: 5px;
+}
