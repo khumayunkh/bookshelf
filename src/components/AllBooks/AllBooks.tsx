@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
-import {books} from './../array'
 import style from './allbooks.module.css'
 import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { fetchBooks } from "../../store/BooksSlice";
+import bookImg from './../../images/book.jpg'
 
-export default function AllBooks(){
+export const AllBooks = () => {
   const {isAuth} = useAppSelector(state => state.login)
-  const book = useAppSelector(state => state.books.list)
-  console.log(book)
+  const bookList = useAppSelector(state => state.books.list)
+  console.log(bookList)
   const dispatch = useAppDispatch()
 
   useEffect(() =>{
@@ -17,17 +17,16 @@ export default function AllBooks(){
       dispatch(fetchBooks())
     }
   },[dispatch])
+  console.log(bookList)
 
   return(
       <>
       <div className={style.container}>
-          {books.map((item, index)=>
-            <div key={index} className={style.book}>
-              {item.cover}
+        {bookList?.data?.map((i) => <div className={style.book}>
+              <img src={bookImg}/>
               <div className={style.title}>
                 <div className={style.title_in}>
-                  <h3>{item.title}, {item.published}</h3>
-                  <h4>By {item.author}</h4>
+                    isbn:  {i.book.isbn}
                 </div>
                 <div className={style.btn}>
                       <FormControl>
@@ -45,8 +44,7 @@ export default function AllBooks(){
                   <DeleteIcon/>
                 </div>
               </div>
-            </div>
-          )}
+            </div>)}
         </div>
       </>
   )

@@ -1,21 +1,29 @@
 import { createSlice, PayloadAction, createAsyncThunk, AnyAction } from '@reduxjs/toolkit';
 import { AddBooks, getAllBooks } from '../api/Books';
 
-type Book = {
-  id: string;
-  title: string;
-  isbn: string;
-  author: string;
-  published: string;
-  cover : string;
+
+type BookData = {
+  book:{
+    id: string;
+    title: string;
+    isbn: string;
+    author: string;
+    published: string;
+    cover : string;
+  }
+}
+
+type Book ={
+  data: BookData[]
 }
 
 type BooksState = {
-  list: Book[];
+  list?: Book;
   loading: boolean;
   error: string | null;
 }
-export const fetchBooks = createAsyncThunk<Book[], undefined, {rejectValue: string}>(
+
+export const fetchBooks = createAsyncThunk<Book, undefined, {rejectValue: string}>(
     'todos/fetchTodos',
     async function (_, { rejectWithValue }) {
       const response = await getAllBooks();
@@ -25,7 +33,6 @@ export const fetchBooks = createAsyncThunk<Book[], undefined, {rejectValue: stri
       }
 
       const data = await response.data;
-      console.log(response.data)
 
       return data;
     }
@@ -44,35 +51,7 @@ export const addNewBooks = createAsyncThunk<Book, { isbn:string}, { rejectValue:
         const data = response.data
         return data
     }
-  );
-
-
-// export const toggleStatus = createAsyncThunk<Todo, string, { rejectValue: string, state: { todos: TodosState} }>(
-//   'book/toggleStatus',
-//   async function (id, { rejectWithValue, getState }) {
-//     const todo = getState().todos.list.find(todo => todo.id === id);
-
-//     if (todo) {
-//       const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
-//         method: 'PATCH',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//           completed: !todo.completed,
-//         })
-//       });
-  
-//       if (!response.ok) {
-//         return rejectWithValue('Can\'t toggle status. Server error.');
-//       }
-  
-//       return (await response.json()) as Todo; 
-//     }
-
-//     return rejectWithValue('No such todo in the list!')
-//   }
-// );
+);
 
 export const deleteBook = createAsyncThunk<string, string, { rejectValue: string }>(
   'todos/deleteTodo',
@@ -90,7 +69,6 @@ export const deleteBook = createAsyncThunk<string, string, { rejectValue: string
 );
 
 const initialState: BooksState = {
-  list: [],
   loading: false,
   error: null,
 }

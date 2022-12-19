@@ -1,3 +1,4 @@
+import { ResetTv } from "@mui/icons-material";
 import { TextField } from "@mui/material";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -7,16 +8,14 @@ import style from './addbook.module.css'
 
 export const AddBook = () => {
     const dispatch = useAppDispatch()
-    const {register, handleSubmit} = useForm()
-    const [isbn, setIsbn] = useState<string>('007462543X')
+    const {register, handleSubmit, reset} = useForm()
+    const isbnRegister = register('isbn')
     
-    const onSubmit = async() => {
-        if(isValidISBN(isbn) === true){
-            dispatch(addNewBooks({
-                isbn: isbn
-            }))
-            dispatch(fetchBooks())
-        }
+    const onSubmit = async(data: any) => {
+        dispatch(addNewBooks({
+            isbn: data.isbn
+        }))
+        reset()
     }
     
     function isValidISBN(isbn: any)
@@ -54,16 +53,13 @@ export const AddBook = () => {
         return (sum % 11 == 0);
     }
 
-    console.log(isValidISBN(isbn)===false)
-    console.log(isbn)
     return(
         <>
         <div className={style.container}>
             <div className={style.add}>
                 <form className={style.form} onSubmit={handleSubmit(onSubmit)}>
                     <TextField
-                        value={isbn}
-                        onChange={e => setIsbn(e.target.value)}
+                        {...isbnRegister}
                         sx={{ m: 1, width: '35ch' }}
                         id="standard-multiline-flexible"
                         label="Isbn of book"

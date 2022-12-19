@@ -1,31 +1,41 @@
 import React from "react";
 import {books} from './../array'
 import style from './finished.module.css'
-import { Button } from "@mui/material";
+import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
+import bookImg from './../../images/book.jpg'
+import { useAppSelector } from "../../hook";
 
 export default function Finished(){
+  const bookList = useAppSelector(state => state.books.list)
+  
     return(
-        <>
-        <div className={style.container}>
-            {books.map((item, index)=>item.status == 3?
-              <div className={style.book}>
-                {item.cover}
-                <div className={style.title}>
-                  <div className={style.title_in}>
-                    <h3>{item.title}, {item.published}</h3>
-                    <h4>By {item.author}</h4>
-                  </div>
-                  <div className={style.btn}> 
-                    <Button variant="contained">
-                        Status: Finished
-                    </Button>
-                    <DeleteIcon/>
-                  </div>
+      <>
+      <div className={style.container}>
+        {bookList?.data?.map((i) => <div className={style.book}>
+              <img src={bookImg}/>
+              <div className={style.title}>
+                <div className={style.title_in}>
+                    isbn:  {i.book.isbn}
                 </div>
-              </div>:<></>
-            )}
-          </div>
-        </>
+                <div className={style.btn}>
+                      <FormControl>
+                      <FormLabel id="demo-radio-buttons-group-label">Status</FormLabel>
+                      <RadioGroup
+                        aria-labelledby="demo-radio-buttons-group-label"
+                        defaultValue="New"
+                        name="radio-buttons-group"
+                      >
+                        <FormControlLabel value="New" control={<Radio />} label="New" />
+                        <FormControlLabel value="Reading" control={<Radio />} label="Reading" />
+                        <FormControlLabel value="Finished" control={<Radio />} label="Finished" />
+                      </RadioGroup>
+                    </FormControl>
+                  <DeleteIcon/>
+                </div>
+              </div>
+            </div>)}
+        </div>
+      </>
     )
 }
