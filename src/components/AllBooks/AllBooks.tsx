@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import {books} from './../array'
 import style from './allbooks.module.css'
-import { Button } from "@mui/material";
+import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { fetchBooks } from "../../store/BooksSlice";
@@ -15,6 +15,7 @@ export default function AllBooks(){
       dispatch(fetchBooks())
     }
   },[dispatch])
+
   return(
       <>
       <div className={style.container}>
@@ -27,21 +28,18 @@ export default function AllBooks(){
                   <h4>By {item.author}</h4>
                 </div>
                 <div className={style.btn}>
-                  {item.status == 1 ? 
-                  <Button variant="contained" color="secondary">
-                      Status: New
-                  </Button>:<></>
-                  }
-                  {item.status == 2 ? 
-                  <Button variant="contained" color="success">
-                      Status: Reading
-                  </Button>:<></>
-                  }
-                  {item.status == 3 ? 
-                  <Button variant="contained">
-                      Status: Finished
-                  </Button>:<></>
-                  }
+                      <FormControl>
+                      <FormLabel id="demo-radio-buttons-group-label">Status</FormLabel>
+                      <RadioGroup
+                        aria-labelledby="demo-radio-buttons-group-label"
+                        defaultValue="New"
+                        name="radio-buttons-group"
+                      >
+                        <FormControlLabel value="New" control={<Radio />} label="New" />
+                        <FormControlLabel value="Reading" control={<Radio />} label="Reading" />
+                        <FormControlLabel value="Finished" control={<Radio />} label="Finished" />
+                      </RadioGroup>
+                    </FormControl>
                   <DeleteIcon/>
                 </div>
               </div>
