@@ -7,21 +7,17 @@ export const getAllBooks = async()=>{
 }
 
 export const deleteABook = async(id: number)=>{
-    return await client.delete(`/books/:${id}`)
+    return await client.delete(`books/:${id}`)
 }
 
-export const AddBooks = async(author: string,isbn: string, title:string, published: string, pages: string)=>{
+export const AddBooks = async(isbn: string)=>{
     return await client.post('books',{
-        author: author,
-        isbn : isbn,
-        title: title,
-        published: published,
-        pages: pages
+        isbn : isbn
     })
 }
 
 export const EditABook = async(id: number, status : number)=>{
-    return await client.patch(`/books/:${id}`, {
+    return await client.patch(`books/:${id}`, {
         status : status
     })
 }

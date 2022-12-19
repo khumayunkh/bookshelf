@@ -8,6 +8,8 @@ import { fetchBooks } from "../../store/BooksSlice";
 
 export default function AllBooks(){
   const {isAuth} = useAppSelector(state => state.login)
+  const book = useAppSelector(state => state.books.list)
+  console.log(book)
   const dispatch = useAppDispatch()
 
   useEffect(() =>{

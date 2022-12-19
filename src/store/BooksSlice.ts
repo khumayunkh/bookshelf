@@ -6,7 +6,7 @@ type Book = {
   title: string;
   isbn: string;
   author: string;
-  publishd: string;
+  published: string;
   cover : string;
 }
 
@@ -32,14 +32,11 @@ export const fetchBooks = createAsyncThunk<Book[], undefined, {rejectValue: stri
 );
 
 
-
-
-
-export const addNewBooks = createAsyncThunk<Book, {author:string, isbn:string, title:string, published: string, pages: string}, { rejectValue: string }>(
+export const addNewBooks = createAsyncThunk<Book, { isbn:string}, { rejectValue: string }>(
     'books/addNewBooks',
-    async function ({author,isbn, title, published, pages}, { rejectWithValue }) {
+    async function ({isbn}, { rejectWithValue }) {
   
-        const response = await AddBooks(author,isbn, title, published, pages)
+        const response = await AddBooks(isbn)
   
         if (!response) {
           return rejectWithValue('Can\'t add task. Server error.');

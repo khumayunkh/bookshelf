@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
+import BooksSlice from './BooksSlice';
 import signUp from './SignUp';
 
 
 const store = configureStore({
   reducer: {
     login: signUp,
+    books: BooksSlice
   },
 });
 
