@@ -37,7 +37,6 @@ export const signInThunk = createAsyncThunk<void, { name: string, email: string,
           dispatch(setIsAuthAction(true))
           localStorage.setItem('key', res.data.data.key)
           localStorage.setItem('secret', res.data.data.secret)
-          console.log(data)
           return data
       } 
       catch (error) {

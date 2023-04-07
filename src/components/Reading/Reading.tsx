@@ -8,11 +8,12 @@ import { deleteBook } from "../../store/BooksSlice";
 export default function Reading(){
   const bookList = useAppSelector(state => state.books.list)
   const dispatch = useAppDispatch()
-
+  
     return(
       <>
       <div className={style.container}>
-        {bookList?.data?.map((i) => <div className={style.book}>
+        {bookList?.data?.map((i) =>
+            <div className={style.book}>
               <img src={bookImg}/>
               <div className={style.title}>
                 <div className={style.title_in}>
@@ -28,6 +29,7 @@ export default function Reading(){
                       >
                         <FormControlLabel value="New" control={<Radio />} label="New" />
                         <FormControlLabel value="Reading" control={<Radio />} label="Reading" />
+                  
                         <FormControlLabel value="Finished" control={<Radio />} label="Finished" />
                       </RadioGroup>
                     </FormControl>

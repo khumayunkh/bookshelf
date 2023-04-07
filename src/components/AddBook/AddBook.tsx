@@ -2,12 +2,14 @@ import { ResetTv } from "@mui/icons-material";
 import { TextField } from "@mui/material";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../hook";
 import { addNewBooks, fetchBooks } from "../../store/BooksSlice";
 import style from './addbook.module.css'
 
 export const AddBook = () => {
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
     const {register, handleSubmit, reset} = useForm()
     const isbnRegister = register('isbn')
     

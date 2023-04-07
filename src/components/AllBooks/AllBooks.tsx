@@ -1,15 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import style from './allbooks.module.css'
 import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useAppDispatch, useAppSelector } from "../../hook";
-import { deleteBook, fetchBooks } from "../../store/BooksSlice";
+import { deleteBook, EditBooks, fetchBooks } from "../../store/BooksSlice";
 import bookImg from './../../images/book.jpg'
 
 export const AllBooks = () => {
   const {isAuth} = useAppSelector(state => state.login)
   const bookList = useAppSelector(state => state.books.list)
-  console.log(bookList)
+  const [count, setCount] = useState(0);
+
   const dispatch = useAppDispatch()
 
   useEffect(() =>{
@@ -17,7 +18,18 @@ export const AllBooks = () => {
       dispatch(fetchBooks())
     }
   },[dispatch])
-  console.log(bookList)
+
+
+  // useEffect(() =>{
+  //   dispatch(EditBooks())
+  // },[count])
+
+
+  const handleClick = (event: any) => {
+    if(count<2){
+      setCount(count + 1);
+    }
+  };
 
   return(
       <>
@@ -29,18 +41,10 @@ export const AllBooks = () => {
                     isbn:  {i.book.isbn}
                 </div>
                 <div className={style.btn}>
-                      <FormControl>
-                      <FormLabel id="demo-radio-buttons-group-label">Status</FormLabel>
-                      <RadioGroup
-                        aria-labelledby="demo-radio-buttons-group-label"
-                        defaultValue="New"
-                        name="radio-buttons-group"
-                      >
-                        <FormControlLabel value="New" control={<Radio />} label="New" />
-                        <FormControlLabel value="Reading" control={<Radio />} label="Reading" />
-                        <FormControlLabel value="Finished" control={<Radio />} label="Finished" />
-                      </RadioGroup>
-                    </FormControl>
+                      {i.status == '0'? <h2>News</h2>:<></>}
+                      {i.status == '1'? <h2>Reading</h2>:<></>}
+                      {i.status == '2'? <h2>Finished</h2>:<></>}
+                      <button onClick={handleClick}>Change Status</button>
                   <button className={style.delete} onClick={() => dispatch(deleteBook(i.book.id))}>Delete</button>
                 </div>
               </div>
